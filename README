@@ -1,0 +1,21 @@
+README: 
+(edited July 14, 2011)
+
+This is a small program that will take an object file and a source file assosciated 
+with it and display some statistics about the source file code transposed into 
+assembly language commands. The perl file should be usable out of the box; just run
+    chmod +x analyzer.pl 
+to add execution permissions, and then you can use it (it has a help output if you run
+it with no parameters, or even:
+    ./analyzer.pl --help
+
+The BASH script, install.sh is provided for convenience; all is does is append the contents
+of the lisp file onto your .emacs configuration file and copy the analyzer script into your 
+~/bin directory. You could, of course, do these manually to the same effect.
+
+The emacs default key combination to view assembly source is C-x C-a (Control + x then Control + a).
+You can edit the .emacs file and remap the function to your favorite key combination.
+
+I hope you enjoy the little utility,
+
+Pasha Muravyev
