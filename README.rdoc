@@ -3,9 +3,22 @@
 This is a script that will take an object file and a source file assosciated 
 with it and display some statistics about the source file code transposed into 
 assembly language commands. The perl file should be usable out of the box; just run
-    ```chmod +x analyzer.pl```
-to add execution permissions, and then you can use it (it has a help output if you run it with no parameters, or even:
-    ```./analyzer.pl --help```
+    chmod +x analyzer.pl
+to add execution permissions, and then you can use it (it has a help output if you run it with no parameters, Usage:
+    analyzer.pl [options]  <object file>  <source file>
+
+## Options:
+  * -l, --line \t activates line mode:  -l 42 to get information about line 42
+  * -h, --help \t (or no parameters) brings up this message
+## Example: 
+  * perl analyzer.pl --line 54 debug/myfile.o myfile.cpp
+## Description:
+  * Prints out an analysis of the source file's source code, using the program objdump.
+  * Specifying the source file is optional if the source file is a C++ file with the same name as the object file. The object file/executable should be compiled with -g (debug) flag.
+
+
+To get a list of these options on the command line, simply run:
+    ./analyzer.pl --help
 
 The BASH script, install.sh is provided for convenience; all is does is append the contents of the lisp file onto your .emacs configuration file and copy the analyzer script into your ~/bin directory.
 
