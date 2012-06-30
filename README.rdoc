@@ -7,15 +7,35 @@ assembly language commands. The perl file should be usable out of the box; just 
 to add execution permissions, and then you can use it (it has a help output if you run it with no parameters, Usage:
     analyzer.pl [options]  <object file>  <source file>
 
+**IMPORTANT: You must generate the object file passing the -g (debug flag) to gcc/g++, otherwise this program will not work**
+
 === Options:
-    -l, --line \t activates line mode:  -l 42 to get information about line 42
-    -h, --help \t (or no parameters) brings up this message
+    -l, --line  activates line mode:  -l 42 to get information about line 42
+    -h, --help (or no parameters) brings up this message
 === Example: 
     perl analyzer.pl --line 54 debug/myfile.o myfile.cpp
 === Description:
 * Prints out an analysis of the source file's source code, using the program objdump.
 * Specifying the source file is optional if the source file is a C++ file with the same name as the object file. The object file/executable should be compiled with -g (debug) flag.
+=== Sample output (called on object file)
+    ./analyzer.pl hello.o hello.c
 
+    Line | ASM |JMP |CALL |           Source Code
+    ---------------------------------------------------------------
+       1 |   0 |  0 |   0 |   #include <iostream>
+       2 |   0 |  0 |   0 |   
+       3 |   5 |  0 |   0 |   int main(int argc, char* argv[]){
+       4 |   3 |  0 |   1 |     std::cout << "Hello World!";
+       5 |   1 |  0 |   0 |     return 0;
+       6 |   4 |  0 |   0 |   }
+=== Sample output (one line of code)
+    ./analyzer.pl hello.o -l 3
+
+    0:  55                    push   %rbp
+    1: 48 89 e5              mov    %rsp,%rbp
+    4: 48 83 ec 10           sub    $0x10,%rsp
+    8: 89 7d fc              mov    %edi,-0x4(%rbp)
+    b: 48 89 75 f0           mov    %rsi,-0x10(%rbp)
 
 To get a list of these options on the command line, simply run:
     ./analyzer.pl --help
