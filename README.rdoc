@@ -2,24 +2,28 @@
 
 This is a script that will take an object file and a source file assosciated 
 with it and display some statistics about the source file code transposed into 
-assembly language commands. The perl file should be usable out of the box; just run
+assembly language commands. It uses the program objdump behind the scenes to get
+the source code to assembly code mapping (it basically just prettifies objdump's output)
+
+== Setup
+
+The perl file should be usable out of the box; just run
     chmod +x analyzer.pl
-to add execution permissions, and then you can use it (it has a help output if you run it with no parameters, Usage:
-    analyzer.pl [options]  <object file>  <source file>
+to add execution permissions to the analyzer.pl script, and then you should be able to invoke it: ```analyzer.pl [options]  <object file>  <source file>```
 
 **IMPORTANT: You must generate the object file passing the -g (debug flag) to gcc/g++, otherwise this program will not work**
 
+== Usage
+
+=== Syntax
+    analyzer.pl [options]  <object file>  <source file>
 === Options:
     -l, --line  activates line mode:  -l 42 to get information about line 42
     -h, --help (or no parameters) brings up this message
-=== Example: 
-    perl analyzer.pl --line 54 debug/myfile.o myfile.cpp
-=== Description:
-* Prints out an analysis of the source file's source code, using the program objdump.
-* Specifying the source file is optional if the source file is a C++ file with the same name as the object file. The object file/executable should be compiled with -g (debug) flag.
-=== Sample output (called on object file)
-    ./analyzer.pl hello.o hello.c
-
+=== Sample use: 
+    g++ -c -g hello.cpp -o hello.o
+    perl analyzer.pl hello.o hello.cpp
+=== Sample output
     Line | ASM |JMP |CALL |           Source Code
     ---------------------------------------------------------------
        1 |   0 |  0 |   0 |   #include <iostream>
@@ -29,7 +33,7 @@ to add execution permissions, and then you can use it (it has a help output if y
        5 |   1 |  0 |   0 |     return 0;
        6 |   4 |  0 |   0 |   }
 === Sample output (one line of code)
-    ./analyzer.pl hello.o -l 3
+    Command: ./analyzer.pl hello.o --line 3
 
     0: 55                    push   %rbp
     1: 48 89 e5              mov    %rsp,%rbp
