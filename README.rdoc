@@ -7,14 +7,14 @@ assembly language commands. The perl file should be usable out of the box; just 
 to add execution permissions, and then you can use it (it has a help output if you run it with no parameters, Usage:
     analyzer.pl [options]  <object file>  <source file>
 
-## Options:
-  * -l, --line \t activates line mode:  -l 42 to get information about line 42
-  * -h, --help \t (or no parameters) brings up this message
-## Example: 
-  * perl analyzer.pl --line 54 debug/myfile.o myfile.cpp
-## Description:
-  * Prints out an analysis of the source file's source code, using the program objdump.
-  * Specifying the source file is optional if the source file is a C++ file with the same name as the object file. The object file/executable should be compiled with -g (debug) flag.
+=== Options:
+* -l, --line \t activates line mode:  -l 42 to get information about line 42
+* -h, --help \t (or no parameters) brings up this message
+=== Example: 
+* perl analyzer.pl --line 54 debug/myfile.o myfile.cpp
+=== Description:
+* Prints out an analysis of the source file's source code, using the program objdump.
+* Specifying the source file is optional if the source file is a C++ file with the same name as the object file. The object file/executable should be compiled with -g (debug) flag.
 
 
 To get a list of these options on the command line, simply run:
