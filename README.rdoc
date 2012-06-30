@@ -31,7 +31,7 @@ to add execution permissions, and then you can use it (it has a help output if y
 === Sample output (one line of code)
     ./analyzer.pl hello.o -l 3
 
-    0:  55                    push   %rbp
+    0: 55                    push   %rbp
     1: 48 89 e5              mov    %rsp,%rbp
     4: 48 83 ec 10           sub    $0x10,%rsp
     8: 89 7d fc              mov    %edi,-0x4(%rbp)
